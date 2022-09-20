@@ -1,15 +1,21 @@
 import React, {useState, useEffect} from 'react';
 
+
 import {SafeAreaView, View, FlatList, Text, TouchableOpacity, ActivityIndicator, Modal} from 'react-native';
 import styles from '../Styles/styles';
+
 import axios from 'axios';
 
-const ShowDisneyChatList = (props) => {
+import {useDispatch} from 'react-redux';
+import {GET_DISNEY_CHAR_REDUCERS} from '../Constants/constants';
 
-    const URL = "https://api.disneyapi.dev/characters"
+
+const ShowDisneyChatList = (props) => {
+    const URL = 'https://api.disneyapi.dev/characters'
     const [fetchResponse, setResponse] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const {navigate} = props.navigation;
+    const dispatch = useDispatch();
 
     {/*Componenet Did load*/}
     useEffect ( () => {
@@ -20,15 +26,20 @@ const ShowDisneyChatList = (props) => {
 
     {/*Navigation*/}
     goToNextScreen = (props) => {
-      return navigate('DisneyCharDetails', props)
+
+      {/*pass data through Navigation
+        navigate('DisneyCharDetails', props)*/}
+      return navigate('DisneyCharDetails')
     }
 
-    {/*Async Await*/}
+    {/*Async Await with Axios*/}
     const fetchDisneyCharList = async() => {
 
       try {
           setModalVisible(true);
           let response = await axios.get(URL);
+
+
           setResponse(response.data.data);
           setModalVisible(false);
       }
@@ -53,7 +64,22 @@ const ShowDisneyChatList = (props) => {
             data={fetchResponse}
             renderItem={({item}) =>
               <TouchableOpacity
-              onPress = {() => this.goToNextScreen(item)}>
+                onPress = {() =>
+                  {
+                      {/*1. Pass data through Redux*/}
+                      const action = {
+                          type: GET_DISNEY_CHAR_REDUCERS,
+                          payload: item
+                        }
+                      dispatch(action);
+
+                      {/*2. Pass data through Navigation
+                        this.goToNextScreen(item);*/}
+
+                        this.goToNextScreen();
+
+                  }
+              }>
                 <Text style = {styles.item}> {item.name}</Text>
               </TouchableOpacity>
           }

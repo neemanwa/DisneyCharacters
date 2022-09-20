@@ -2,10 +2,15 @@ import React, {useState, useEffect} from 'react';
 import * as RN from 'react-native';
 import {SafeAreaView, View, Text, Image, ScrollView, SectionList, TouchableOpacity} from 'react-native';
 import styles from '../Styles/styles';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ShowDetails = (props) =>{
 
-    const params = props.route.params;
+    {/*1. Fecth the data through Navigation
+      const paramss = props.route.params; */}
+
+    {/*2. Fecth the data through Redux*/}
+    const params = useSelector((store) => store.disneyCharacters);
     const [getData, setData] = useState([]);
 
     {/*Componenet Did load*/}
@@ -15,7 +20,6 @@ const ShowDetails = (props) =>{
 
     {/*Preparing data to load inside section list*/}
     const prepareData = () => {
-
        const DATA = [
         {
           title : "films (" + params.films.length + ")",
