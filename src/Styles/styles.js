@@ -20,6 +20,17 @@ import {StyleSheet} from 'react-native';
         color: 'White'
       },
 
+      textInputStyle: {
+        marginVertical: 10,
+        borderWidth:3,
+        borderColor: '#454545',
+        padding: 10,
+        backgroundColor: '#454545',
+        borderRadius: 8,
+        color: 'white'
+
+      },
+
       item: {
         padding: 10,
         fontSize: 18,

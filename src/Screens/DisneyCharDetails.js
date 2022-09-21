@@ -67,6 +67,7 @@ const ShowDetails = (props) =>{
     {/*UI*/}
     return(
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'flex-start', backgroundColor: 'black'}}>
+
                 <SectionList
 
                     style = {styles.sectionListStyle}
