@@ -18,7 +18,6 @@ const ShowDisneyChatList = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const {navigate} = props.navigation;
     const dispatch = useDispatch();
-    var response;
 
     {/*Componenet Did load*/}
     useEffect ( () => {
@@ -40,7 +39,7 @@ const ShowDisneyChatList = (props) => {
 
       try {
           setModalVisible(true);
-          response = await axios.get(URL);
+          let response = await axios.get(URL);
 
           setResponse(response.data.data);
 
